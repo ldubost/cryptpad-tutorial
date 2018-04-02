@@ -1,3 +1,4 @@
+// This is the initialization loading the CryptPad libraries
 define([
     'jquery',
     '/bower_components/nthen/index.js',
@@ -7,6 +8,7 @@ define([
     '/common/common-hash.js',
     '/common/modes.js',
     '/customize/messages.js'
+    /* Here you can add your own javascript or css to load */
 ], function (
     $,
     nThen,
@@ -18,23 +20,21 @@ define([
     Messages) {
 
 
-    // Add custom Application code
+    /* Here you can initialize your own functions and objects */
 
-
-    // Start of the main loop
+    // This is the main initialization loop
     var andThen2 = function (framework) {
+        // Here you can load the objects or call the functions you have defined
 
-        // OnReady Function called after init
-        framework.onReady(function () {
-            // Add specific application initializations
-        });
-
+        // This is the function from which you will receive updates from CryptPad
+        // In this example we update the textarea with the data received
         framework.onContentUpdate(function (newContent) {
-            // Need to update the content
             console.log("Content should be updated to " + newContent);
             $("#cp-app-miniapp-content").val(newContent.content);
         });
 
+        // This is the function called to get the current state of the data in your app
+        // Here we read the data from the textarea and put it in a javascript object
         framework.setContentGetter(function () {
             var content = $("#cp-app-miniapp-content").val();
             console.log("Content current value is " + content);
@@ -43,27 +43,13 @@ define([
             };
         });
 
-        framework.onEditableChange(function () {
-            // framework.isLocked() || framework.isReadOnly()
-        });
-
-        framework.setTitleRecommender(function () {
-            return "new title";
-        });
-
+        // This is called when the system is ready to start editing
+        // We focus the textarea
         framework.onReady(function (newPad) {
             $("#cp-app-miniapp-content").focus();
         });
 
-        framework.onDefaultContentNeeded(function () {});
-
-        framework.setNormalizer(function (c) {
-            return {
-                content: c.content
-            };
-        });
-
-        // activate being informed of a change in application
+        // We add some code to our application to be informed of changes from the textarea
         var oldVal = "";
         $("#cp-app-miniapp-content").on("change keyup paste", function () {
             var currentVal = $(this).val();
@@ -73,19 +59,15 @@ define([
             oldVal = currentVal;
             // action to be performed on textarea changed
             console.log("Content changed");
+            // we call back the cryptpad framework to inform data has changes
             framework.localChange();
         });
 
+        // starting the CryptPad framework
         framework.start();
     };
 
-    var getThumbnailContainer = function () {
-        var $preview = $('#cp-app-kanban');
-        if ($preview.length && $preview.is(':visible')) {
-            return $preview[0];
-        }
-    };
-
+    // This is the main starting loop
     var main = function () {
         var framework;
 
@@ -94,18 +76,7 @@ define([
             // Framework initialization
             Framework.create({
                 toolbarContainer: '#cme_toolbox',
-                contentContainer: '#cp-app-miniapp-editor',
-                thumbnail: {
-                    getContainer: getThumbnailContainer,
-                    filter: function (el, before) {
-                        if (before) {
-                            //$(el).parents().css('overflow', 'visible');
-                            $(el).css('max-height', Math.max(600, $(el).width()) + 'px');
-                            return;
-                        }
-                        $(el).parents().css('overflow', '');
-                        $(el).css('max-height', '');
-                    }
+                contentContainer: '#cp-app-miniapp-editor'
                 }
             }, waitFor(function (fw) {
                 framework = fw;
