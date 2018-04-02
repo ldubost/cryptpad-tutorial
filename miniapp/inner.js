@@ -24,8 +24,6 @@ define([
     // Start of the main loop
     var andThen2 = function (framework) {
 
-        var common = framework._.sfCommon;
-
         // OnReady Function called after init
         framework.onReady(function () {
             // Add specific application initializations
