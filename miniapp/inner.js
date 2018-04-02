@@ -77,7 +77,6 @@ define([
             Framework.create({
                 toolbarContainer: '#cme_toolbox',
                 contentContainer: '#cp-app-miniapp-editor'
-                }
             }, waitFor(function (fw) {
                 framework = fw;
                 andThen2(framework);
