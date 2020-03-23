@@ -7,7 +7,8 @@ define([
     '/common/common-util.js',
     '/common/common-hash.js',
     '/common/modes.js',
-    '/customize/messages.js'
+    '/customize/messages.js',
+    'less!/miniapp/app.less'
     /* Here you can add your own javascript or css to load */
 ], function (
     $,

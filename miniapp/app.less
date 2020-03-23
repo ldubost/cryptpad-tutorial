@@ -1,5 +1,7 @@
-@import (once) "../../customize/src/less2/include/browser.less";
-@import (once) "../../customize/src/less2/include/framework.less";
+body.cp-app-generic {
+
+@import (once) "../../customize.dist/src/less2/include/browser.less";
+@import (once) "../../customize.dist/src/less2/include/framework.less";
 
 .framework_main( @bg-color: @colortheme_code-bg,
 @warn-color: @colortheme_code-warn,
@@ -36,4 +38,5 @@
             resize: none;
         }
     }
+}
 }
